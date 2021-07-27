@@ -2,7 +2,9 @@ import 'dart:ui';
 
 import 'package:dynamic_widget/dynamic_widget.dart';
 import 'package:dynamic_widget/dynamic_widget/drop_cap_text.dart';
+import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
+import 'package:google_fonts/google_fonts.dart';
 
 TextAlign parseTextAlign(String? textAlignString) {
   //left the system decide
@@ -226,6 +228,45 @@ Color? parseHexColor(String? hexColorString) {
   return Color(colorInt);
 }
 
+List<Map<String, dynamic>>? exportShadowList(List<Shadow>? shadows) {
+  List<Map<String, dynamic>> data = [];
+  if (shadows == null) {
+    return null;
+  }
+  shadows.forEach((element) {
+    data.add(<String, dynamic>{
+      "color":
+          element.color != null ? element.color.value.toRadixString(16) : null,
+      "offset": exportOffset(element.offset),
+      "blurRadius": element.blurRadius
+    });
+  });
+  return data;
+}
+
+List<Shadow>? parseShadowList(List<Map<String, dynamic>>? shadowList) {
+  List<Shadow>? data = [];
+  if (shadowList == null) {
+    return null;
+  }
+  shadowList.forEach((element) {
+    data.add(Shadow(
+      color: parseHexColor(element['color']) ?? Colors.black,
+      offset: parseOffset(element['offset']),
+      blurRadius: element['blurRadius'],
+    ));
+  });
+  return data;
+}
+
+Map<String, dynamic>? exportOffset(Offset? offset) {
+  return <String, dynamic>{"dx": offset!.dx, "dy": offset.dy};
+}
+
+Offset parseOffset(Map<String, dynamic>? offset) {
+  return Offset(offset!['dx'], offset['dy']);
+}
+
 TextStyle? parseTextStyle(Map<String, dynamic>? map) {
   if (map == null) {
     return null;
@@ -234,21 +275,30 @@ TextStyle? parseTextStyle(Map<String, dynamic>? map) {
   String? color = map['color'];
   String? debugLabel = map['debugLabel'];
   String? decoration = map['decoration'];
-  String? fontFamily = map['fontFamily'];
+  String? fontFamily = map['fontFamily'].toString().replaceAll('_regular', '');
   double? fontSize = map['fontSize']?.toDouble();
   String? fontWeight = map['fontWeight'];
+  double? letterSpacing = map['letterSpacing']?.toDouble();
+  double? wordSpacing = map['wordSpacing']?.toDouble();
+  double? height = map['height']?.toDouble();
+  List<Map<String, dynamic>>? shadowList =
+      List<Map<String, dynamic>>.from(map['shadows']);
   FontStyle fontStyle =
       'italic' == map['fontStyle'] ? FontStyle.italic : FontStyle.normal;
 
-  return TextStyle(
-    color: parseHexColor(color),
-    debugLabel: debugLabel,
-    decoration: parseTextDecoration(decoration),
-    fontSize: fontSize,
-    fontFamily: fontFamily,
-    fontStyle: fontStyle,
-    fontWeight: parseFontWeight(fontWeight),
-  );
+  return GoogleFonts.getFont('$fontFamily',
+      textStyle: TextStyle(
+          color: parseHexColor(color),
+          debugLabel: debugLabel,
+          decoration: parseTextDecoration(decoration),
+          fontSize: fontSize,
+          fontFamily: fontFamily,
+          fontStyle: fontStyle,
+          fontWeight: parseFontWeight(fontWeight),
+          letterSpacing: letterSpacing,
+          wordSpacing: wordSpacing,
+          height: height,
+          shadows: parseShadowList(shadowList)));
 }
 
 Map<String, dynamic>? exportTextStyle(TextStyle? textStyle) {
@@ -266,6 +316,10 @@ Map<String, dynamic>? exportTextStyle(TextStyle? textStyle) {
     "fontFamily": textStyle.fontFamily,
     "fontStyle": FontStyle.italic == textStyle.fontStyle ? "italic" : "normal",
     "fontWeight": exportFontWeight(textStyle.fontWeight),
+    "letterSpacing": textStyle.letterSpacing,
+    "wordSpacing": textStyle.wordSpacing,
+    "height": textStyle.height,
+    "shadows": exportShadowList(textStyle.shadows)
   };
 }
 
@@ -747,7 +801,6 @@ FilterQuality? parseFilterQuality(String? filterQualityString) {
 }
 
 String exportFilterQuality(FilterQuality filterQuality) {
-
   String rt = "low";
   if (filterQuality == FilterQuality.none) {
     rt = "none";
@@ -943,7 +996,6 @@ Clip parseClipBehavior(String? clipBehaviorString) {
 }
 
 String exportClipBehavior(Clip clip) {
-
   if (clip == Clip.antiAliasWithSaveLayer) {
     return "antiAliasWithSaveLayer";
   }
@@ -1031,7 +1083,8 @@ DropCap? parseDropCap(Map<String, dynamic>? map, BuildContext buildContext,
   );
 }
 
-Map<String, dynamic>? exportDropCap(DropCap? dropCap, BuildContext? buildContext) {
+Map<String, dynamic>? exportDropCap(
+    DropCap? dropCap, BuildContext? buildContext) {
   if (dropCap == null) {
     return null;
   }
@@ -1042,8 +1095,7 @@ Map<String, dynamic>? exportDropCap(DropCap? dropCap, BuildContext? buildContext
   };
 }
 
-String exportAlignmentDirectional(AlignmentDirectional alignmentDirectional){
-
+String exportAlignmentDirectional(AlignmentDirectional alignmentDirectional) {
   if (alignmentDirectional == AlignmentDirectional.bottomCenter) {
     return "bottomCenter";
   }

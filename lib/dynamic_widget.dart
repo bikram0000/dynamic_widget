@@ -132,20 +132,21 @@ class DynamicWidgetBuilder {
     return null;
   }
 
-  static List<Widget> buildWidgets(
-      List<dynamic> values, BuildContext buildContext, ClickListener? listener) {
+  static List<Widget> buildWidgets(List<dynamic> values,
+      BuildContext buildContext, ClickListener? listener) {
     initDefaultParsersIfNess();
     List<Widget> rt = [];
     for (var value in values) {
       var buildFromMap2 = buildFromMap(value, buildContext, listener);
-      if(buildFromMap2!=null) {
+      if (buildFromMap2 != null) {
         rt.add(buildFromMap2);
       }
     }
     return rt;
   }
 
-  static Map<String, dynamic>? export(Widget? widget, BuildContext? buildContext) {
+  static Map<String, dynamic>? export(
+      Widget? widget, BuildContext? buildContext) {
     initDefaultParsersIfNess();
     var parser = _findMatchedWidgetParserForExport(widget);
     if (parser != null) {
