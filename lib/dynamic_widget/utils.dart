@@ -216,6 +216,28 @@ String exportFontWeight(FontWeight? fontWeight) {
   return rt;
 }
 
+List<String>? exportColorList(List<Color> colors) {
+  List<String> data = [];
+  if (colors == null) {
+    return null;
+  }
+  colors.forEach((element) {
+    data.add(element.value.toRadixString(16));
+  });
+  return data;
+}
+
+List<Color>? parseColorList(List<String> colors) {
+  if (colors == null) {
+    return null;
+  }
+  List<Color> data = [];
+  colors.forEach((element) {
+    data.add(parseHexColor(element)!);
+  });
+  return data;
+}
+
 Color? parseHexColor(String? hexColorString) {
   if (hexColorString == null) {
     return null;
