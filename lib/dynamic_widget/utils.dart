@@ -5,6 +5,7 @@ import 'package:dynamic_widget/dynamic_widget/drop_cap_text.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:recase/recase.dart';
 
 TextAlign parseTextAlign(String? textAlignString) {
   //left the system decide
@@ -281,6 +282,14 @@ List<Shadow>? parseShadowList(List<Map<String, dynamic>>? shadowList) {
   return data;
 }
 
+String? getFontFamilyName(String? fontFamily) {
+  if (fontFamily == null) {
+    return 'Roboto';
+  }
+  List<String> data = fontFamily.split('_');
+  return data[0].titleCase;
+}
+
 Map<String, dynamic>? exportOffset(Offset? offset) {
   return <String, dynamic>{"dx": offset!.dx, "dy": offset.dy};
 }
@@ -297,17 +306,16 @@ TextStyle? parseTextStyle(Map<String, dynamic>? map) {
   String? color = map['color'];
   String? debugLabel = map['debugLabel'];
   String? decoration = map['decoration'];
-  String? fontFamily = map['fontFamily'].toString().replaceAll('_regular', '');
+  String? fontFamily = getFontFamilyName(map['fontFamily']);
   double? fontSize = map['fontSize']?.toDouble();
   String? fontWeight = map['fontWeight'];
   double? letterSpacing = map['letterSpacing']?.toDouble();
   double? wordSpacing = map['wordSpacing']?.toDouble();
   double? height = map['height']?.toDouble();
   List<Map<String, dynamic>>? shadowList =
-      List<Map<String, dynamic>>.from(map['shadows']);
+      List<Map<String, dynamic>>.from(map['shadows'] ?? []);
   FontStyle fontStyle =
       'italic' == map['fontStyle'] ? FontStyle.italic : FontStyle.normal;
-
   return GoogleFonts.getFont('$fontFamily',
       textStyle: TextStyle(
           color: parseHexColor(color),
