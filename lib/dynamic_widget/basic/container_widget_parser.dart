@@ -28,6 +28,7 @@ class ContainerWidgetParser extends WidgetParser {
       width: map['width']?.toDouble(),
       height: map['height']?.toDouble(),
       constraints: constraints,
+      decoration: parseBoxDecoration(map['decoration']),
       child: child,
     );
 
@@ -68,7 +69,10 @@ class ContainerWidgetParser extends WidgetParser {
           : null,
       "constraints":
           constraints != null ? exportConstraints(constraints) : null,
-      "child": DynamicWidgetBuilder.export(realWidget.child, buildContext)
+      "child": DynamicWidgetBuilder.export(realWidget.child, buildContext),
+      "decoration": realWidget.decoration == null
+          ? null
+          : exportBoxDecoration(realWidget.decoration as BoxDecoration)
     };
   }
 

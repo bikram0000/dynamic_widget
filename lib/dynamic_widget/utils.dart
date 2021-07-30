@@ -353,6 +353,58 @@ Map<String, dynamic>? exportTextStyle(TextStyle? textStyle) {
   };
 }
 
+Map<String, dynamic>? exportBoxDecoration(BoxDecoration? boxDecoration) {
+  if (boxDecoration == null) {
+    return null;
+  }
+
+  // var borderRadius = boxDecoration.borderRadius!;
+  BorderRadius borderRadius = boxDecoration.borderRadius as BorderRadius;
+
+  Border? border =
+      boxDecoration.border == null ? null : boxDecoration.border as Border;
+  return <String, dynamic>{
+    "color": boxDecoration.color != null
+        ? boxDecoration.color!.value.toRadixString(16)
+        : null,
+    "borderRadius":
+        "${borderRadius.topLeft.x},${borderRadius.topRight.x},${borderRadius.bottomLeft.x},${borderRadius.bottomRight.x}",
+    "boxShadow": exportShadowList(boxDecoration.boxShadow),
+    "border": border == null
+        ? null
+        : "${border.top.width},${border.top.color != null ? border.top.color.value.toRadixString(16) : null}",
+  };
+}
+
+BoxDecoration? parseBoxDecoration(Map<String, dynamic>? map) {
+  if (map == null) {
+    return null;
+  }
+  var radius = map['borderRadius'].toString().split(",");
+  var border = map['border'].toString().split(",");
+  double topLeft = double.parse(radius[0]);
+  double topRight = double.parse(radius[1]);
+  double bottomLeft = double.parse(radius[2]);
+  double bottomRight = double.parse(radius[3]);
+
+  String? color = map['color'];
+  List<Map<String, dynamic>>? shadowList =
+      List<Map<String, dynamic>>.from(map['boxShadow'] ?? []);
+  return new BoxDecoration(
+      color: parseHexColor(color),
+      borderRadius: BorderRadius.only(
+          topLeft: Radius.circular(topLeft),
+          topRight: Radius.circular(topRight),
+          bottomLeft: Radius.circular(bottomLeft),
+          bottomRight: Radius.circular(bottomRight)),
+      boxShadow: parseShadowList(shadowList) as List<BoxShadow>,
+      border: border == null
+          ? null
+          : Border.all(
+              width: double.parse(border[0]),
+              color: parseHexColor(border[1]) ?? Colors.transparent));
+}
+
 Alignment parseAlignment(String? alignmentString) {
   Alignment alignment = Alignment.center;
   switch (alignmentString) {
