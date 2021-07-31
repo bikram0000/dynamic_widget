@@ -37,6 +37,7 @@ import 'package:dynamic_widget/dynamic_widget/scrolling/pageview_widget_parser.d
 import 'package:flutter/widgets.dart';
 import 'package:logging/logging.dart';
 
+import 'dynamic_widget/basic/backdropFilter_widget_parser.dart';
 import 'dynamic_widget/basic/cliprrect_widget_parser.dart';
 import 'dynamic_widget/basic/overflowbox_widget_parser.dart';
 
@@ -82,7 +83,8 @@ class DynamicWidgetBuilder {
     OverflowBoxWidgetParser(),
     ElevatedButtonParser(),
     DividerWidgetParser(),
-    AnimateTextWidgetParser()
+    AnimateTextWidgetParser(),
+    BackdropFilterWidgetParser()
   ];
 
   static final _widgetNameParserMap = <String, WidgetParser>{};

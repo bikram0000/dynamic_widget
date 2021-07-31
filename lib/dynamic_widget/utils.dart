@@ -282,6 +282,21 @@ List<Shadow>? parseShadowList(List<Map<String, dynamic>>? shadowList) {
   return data;
 }
 
+List<BoxShadow>? parseBoxShadowList(List<Map<String, dynamic>>? shadowList) {
+  List<BoxShadow>? data = [];
+  if (shadowList == null) {
+    return null;
+  }
+  shadowList.forEach((element) {
+    data.add(BoxShadow(
+      color: parseHexColor(element['color']) ?? Colors.black,
+      offset: parseOffset(element['offset']),
+      blurRadius: element['blurRadius'],
+    ));
+  });
+  return data;
+}
+
 String? getFontFamilyName(String? fontFamily) {
   if (fontFamily == null) {
     return 'Roboto';
@@ -397,8 +412,8 @@ BoxDecoration? parseBoxDecoration(Map<String, dynamic>? map) {
           topRight: Radius.circular(topRight),
           bottomLeft: Radius.circular(bottomLeft),
           bottomRight: Radius.circular(bottomRight)),
-      boxShadow: parseShadowList(shadowList) as List<BoxShadow>,
-      border: border == null
+      boxShadow: parseBoxShadowList(shadowList),
+      border: map['border'] == null || map['border'] == 'null'
           ? null
           : Border.all(
               width: double.parse(border[0]),
