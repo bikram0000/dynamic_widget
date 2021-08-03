@@ -30,6 +30,7 @@ class ContainerWidgetParser extends WidgetParser {
       constraints: constraints,
       decoration: parseBoxDecoration(map['decoration']),
       child: child,
+      clipBehavior: parseClipBehavior(map['clipBehavior']),
     );
 
     if (listener != null && clickEvent != null) {
@@ -72,7 +73,8 @@ class ContainerWidgetParser extends WidgetParser {
       "child": DynamicWidgetBuilder.export(realWidget.child, buildContext),
       "decoration": realWidget.decoration == null
           ? null
-          : exportBoxDecoration(realWidget.decoration as BoxDecoration)
+          : exportBoxDecoration(realWidget.decoration as BoxDecoration),
+      "clipBehavior": exportClipBehavior(realWidget.clipBehavior)
     };
   }
 

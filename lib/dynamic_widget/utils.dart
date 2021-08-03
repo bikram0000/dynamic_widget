@@ -372,16 +372,20 @@ Map<String, dynamic>? exportBoxDecoration(BoxDecoration? boxDecoration) {
   if (boxDecoration == null) {
     return null;
   }
-
   // var borderRadius = boxDecoration.borderRadius!;
   BorderRadius borderRadius = boxDecoration.borderRadius as BorderRadius;
-
   Border? border =
       boxDecoration.border == null ? null : boxDecoration.border as Border;
+  DecorationImage? decorationImage = boxDecoration.image;
+  NetworkImage? image =
+      decorationImage != null ? decorationImage.image as NetworkImage : null;
   return <String, dynamic>{
+    "image": image != null ? image.url : null,
     "color": boxDecoration.color != null
         ? boxDecoration.color!.value.toRadixString(16)
         : null,
+    "boxFit":
+        decorationImage != null ? exportBoxFit(decorationImage.fit) : null,
     "borderRadius":
         "${borderRadius.topLeft.x},${borderRadius.topRight.x},${borderRadius.bottomLeft.x},${borderRadius.bottomRight.x}",
     "boxShadow": exportShadowList(boxDecoration.boxShadow),
@@ -401,11 +405,15 @@ BoxDecoration? parseBoxDecoration(Map<String, dynamic>? map) {
   double topRight = double.parse(radius[1]);
   double bottomLeft = double.parse(radius[2]);
   double bottomRight = double.parse(radius[3]);
-
+  BoxFit? boxFit =
+      map.containsKey('boxFit') ? parseBoxFit(map['boxFit']) : null;
   String? color = map['color'];
   List<Map<String, dynamic>>? shadowList =
       List<Map<String, dynamic>>.from(map['boxShadow'] ?? []);
   return new BoxDecoration(
+      image: map['image'] != null
+          ? DecorationImage(image: NetworkImage(map['image']), fit: boxFit)
+          : null,
       color: parseHexColor(color),
       borderRadius: BorderRadius.only(
           topLeft: Radius.circular(topLeft),

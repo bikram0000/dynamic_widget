@@ -18,7 +18,8 @@ class AssetImageWidgetParser extends WidgetParser {
     double? width = map.containsKey('width') ? map['width']?.toDouble() : null;
     double? height =
         map.containsKey('height') ? map['height']?.toDouble() : null;
-    Color? color = map.containsKey('color') ? parseHexColor(map['color']) : null;
+    Color? color =
+        map.containsKey('color') ? parseHexColor(map['color']) : null;
     BlendMode? blendMode =
         map.containsKey('blendMode') ? parseBlendMode(map['blendMode']) : null;
     BoxFit? boxFit =
@@ -207,7 +208,8 @@ class NetworkImageWidgetParser extends WidgetParser {
     double? width = map.containsKey('width') ? map['width']?.toDouble() : null;
     double? height =
         map.containsKey('height') ? map['height']?.toDouble() : null;
-    Color? color = map.containsKey('color') ? parseHexColor(map['color']) : null;
+    Color? color =
+        map.containsKey('color') ? parseHexColor(map['color']) : null;
     BlendMode? blendMode =
         map.containsKey('blendMode') ? parseBlendMode(map['blendMode']) : null;
     BoxFit? boxFit =
@@ -286,7 +288,7 @@ class NetworkImageWidgetParser extends WidgetParser {
       "colorBlendMode": realWidget.colorBlendMode != null
           ? exportBlendMode(realWidget.colorBlendMode)
           : null,
-      "fit": realWidget.fit != null ? exportBoxFit(realWidget.fit) : null,
+      "boxFit": realWidget.fit != null ? exportBoxFit(realWidget.fit) : null,
       "alignment": realWidget.alignment != null
           ? exportAlignment(realWidget.alignment as Alignment?)
           : null,

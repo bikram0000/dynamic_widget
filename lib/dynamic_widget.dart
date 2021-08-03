@@ -84,7 +84,7 @@ class DynamicWidgetBuilder {
     ElevatedButtonParser(),
     DividerWidgetParser(),
     AnimateTextWidgetParser(),
-    BackdropFilterWidgetParser()
+    BackdropFilterWidgetParser(),
   ];
 
   static final _widgetNameParserMap = <String, WidgetParser>{};
