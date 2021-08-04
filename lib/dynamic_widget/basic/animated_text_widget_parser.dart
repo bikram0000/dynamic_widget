@@ -84,7 +84,7 @@ List<AnimatedText> parseAnimatedTextes(
                 new TextStyle(fontSize: 14),
             textAlign: parseTextAlign(element['textAlign']),
             speed: Duration(milliseconds: element['duration']),
-            colors: parseColorList(element['colors']) ??
+            colors: parseColorList(List<String>.from(element['colors'])) ??
                 [Colors.purple, Colors.blue, Colors.yellow, Colors.red]));
         break;
       case 'RotateAnimatedText':

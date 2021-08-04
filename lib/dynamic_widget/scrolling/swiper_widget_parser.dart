@@ -79,9 +79,7 @@ class _SwiperWidgetState extends State<SwiperWidget> {
   Widget build(BuildContext context) {
     return Swiper(
       itemBuilder: (context, index) {
-        return params.children != null
-            ? params.children![index] ?? Container()
-            : Container();
+        return params.children != null ? params.children![index] : Container();
       },
       itemCount: params.children!.length,
       itemWidth: params.itemWidth ?? 200,
