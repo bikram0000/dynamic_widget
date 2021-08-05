@@ -368,6 +368,40 @@ Map<String, dynamic>? exportTextStyle(TextStyle? textStyle) {
   };
 }
 
+Map<String, dynamic>? exportInputDecoration(InputDecoration? inputDecoration) {
+  if (inputDecoration == null) {
+    return null;
+  }
+//TODO need to write parse method
+  return <String, dynamic>{
+    "isDense": inputDecoration.isDense,
+    "border": exportBorderSide(inputDecoration.border),
+    "hintText": inputDecoration.hintText,
+    "labelText": inputDecoration.labelText,
+  };
+}
+
+Map<String, dynamic>? exportBorderSide(InputBorder? inputBorder) {
+  if (inputBorder == null) {
+    return null;
+  }
+  if (inputBorder == InputBorder.none) {
+    return null;
+  }
+  if (inputBorder.runtimeType == OutlineInputBorder) {
+    OutlineInputBorder border = inputBorder as OutlineInputBorder;
+    BorderRadius borderRadius = border.borderRadius;
+    return <String, dynamic>{
+      "type": "OutlineInputBorder",
+      "borderColor": border.borderSide.color != null
+          ? border.borderSide.color.value.toRadixString(16)
+          : null,
+      "borderRadius":
+          "${borderRadius.topLeft.x},${borderRadius.topRight.x},${borderRadius.bottomLeft.x},${borderRadius.bottomRight.x}",
+    };
+  }
+}
+
 Map<String, dynamic>? exportBoxDecoration(BoxDecoration? boxDecoration) {
   if (boxDecoration == null) {
     return null;
