@@ -11,6 +11,7 @@ class TextFieldWidgetParser implements WidgetParser {
     return TextField(
       textAlign: parseTextAlign(textAlignString),
       style: map.containsKey('style') ? parseTextStyle(map['style']) : null,
+      decoration: parseInputDecoration(map['decoration']),
     );
   }
 
@@ -26,6 +27,7 @@ class TextFieldWidgetParser implements WidgetParser {
           ? exportTextAlign(realWidget.textAlign)
           : "start",
       "style": exportTextStyle(realWidget.style),
+      "decoration": exportInputDecoration(realWidget.decoration),
     };
   }
 

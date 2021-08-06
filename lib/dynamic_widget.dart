@@ -40,6 +40,7 @@ import 'package:logging/logging.dart';
 import 'dynamic_widget/basic/backdropFilter_widget_parser.dart';
 import 'dynamic_widget/basic/cliprrect_widget_parser.dart';
 import 'dynamic_widget/basic/overflowbox_widget_parser.dart';
+import 'dynamic_widget/basic/textfield_widget_parser.dart';
 import 'dynamic_widget/scrolling/swiper_widget_parser.dart';
 
 class DynamicWidgetBuilder {
@@ -86,7 +87,8 @@ class DynamicWidgetBuilder {
     DividerWidgetParser(),
     AnimateTextWidgetParser(),
     BackdropFilterWidgetParser(),
-    SwiperWidgetParser()
+    SwiperWidgetParser(),
+    TextFieldWidgetParser(),
   ];
 
   static final _widgetNameParserMap = <String, WidgetParser>{};

@@ -6,7 +6,6 @@ import 'package:flutter_swiper_null_safety/flutter_swiper_null_safety.dart';
 class SwiperWidgetParser extends WidgetParser {
   @override
   Map<String, dynamic>? export(Widget? widget, BuildContext? buildContext) {
-    // TODO: implement export
     SwiperWidget swiperWidget = widget as SwiperWidget;
     return <String, dynamic>{
       "type": "SwiperWidget",
@@ -42,11 +41,9 @@ class SwiperWidgetParser extends WidgetParser {
   }
 
   @override
-  // TODO: implement widgetName
   String get widgetName => 'SwiperWidget';
 
   @override
-  // TODO: implement widgetType
   Type get widgetType => SwiperWidget;
 }
 

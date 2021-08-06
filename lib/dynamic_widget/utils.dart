@@ -368,20 +368,66 @@ Map<String, dynamic>? exportTextStyle(TextStyle? textStyle) {
   };
 }
 
+InputDecoration? parseInputDecoration(Map<String, dynamic>? map) {
+  if (map == null) {
+    return null;
+  }
+  InputBorder? inputBorder = parseInputBorder(map['border']);
+  return InputDecoration(
+    isDense: map['isDense'],
+    hintText: map['hintText'],
+    labelText: map['labelText'],
+    border: inputBorder,
+    labelStyle: TextStyle(color: inputBorder!.borderSide.color),
+    focusedBorder: parseInputBorder(map['border']),
+  );
+}
+
+InputBorder? parseInputBorder(Map<String, dynamic>? map) {
+  if (map == null) {
+    return null;
+  }
+  var radius = map['borderRadius'].toString().split(",");
+  double topLeft = double.parse(radius[0]);
+  double topRight = double.parse(radius[1]);
+  double bottomLeft = double.parse(radius[2]);
+  double bottomRight = double.parse(radius[3]);
+  if (map['type'] == 'OutlineInputBorder') {
+    return OutlineInputBorder(
+        borderRadius: BorderRadius.only(
+            topLeft: Radius.circular(topLeft),
+            topRight: Radius.circular(topRight),
+            bottomLeft: Radius.circular(bottomLeft),
+            bottomRight: Radius.circular(bottomRight)),
+        borderSide: BorderSide(
+            color: parseHexColor(map['borderColor']) ?? Colors.transparent,
+            width: map['borderWidth'] ?? 1.0));
+  } else {
+    return UnderlineInputBorder(
+        borderRadius: BorderRadius.only(
+            topLeft: Radius.circular(topLeft),
+            topRight: Radius.circular(topRight),
+            bottomLeft: Radius.circular(bottomLeft),
+            bottomRight: Radius.circular(bottomRight)),
+        borderSide: BorderSide(
+            color: parseHexColor(map['borderColor']) ?? Colors.transparent,
+            width: map['borderWidth']));
+  }
+}
+
 Map<String, dynamic>? exportInputDecoration(InputDecoration? inputDecoration) {
   if (inputDecoration == null) {
     return null;
   }
-//TODO need to write parse method
   return <String, dynamic>{
     "isDense": inputDecoration.isDense,
-    "border": exportBorderSide(inputDecoration.border),
+    "border": exportInputBorder(inputDecoration.border),
     "hintText": inputDecoration.hintText,
     "labelText": inputDecoration.labelText,
   };
 }
 
-Map<String, dynamic>? exportBorderSide(InputBorder? inputBorder) {
+Map<String, dynamic>? exportInputBorder(InputBorder? inputBorder) {
   if (inputBorder == null) {
     return null;
   }
@@ -396,6 +442,20 @@ Map<String, dynamic>? exportBorderSide(InputBorder? inputBorder) {
       "borderColor": border.borderSide.color != null
           ? border.borderSide.color.value.toRadixString(16)
           : null,
+      "borderWidth": border.borderSide.width,
+      "borderRadius":
+          "${borderRadius.topLeft.x},${borderRadius.topRight.x},${borderRadius.bottomLeft.x},${borderRadius.bottomRight.x}",
+    };
+  }
+  if (inputBorder.runtimeType == UnderlineInputBorder) {
+    UnderlineInputBorder border = inputBorder as UnderlineInputBorder;
+    BorderRadius borderRadius = border.borderRadius;
+    return <String, dynamic>{
+      "type": "UnderlineInputBorder",
+      "borderColor": border.borderSide.color != null
+          ? border.borderSide.color.value.toRadixString(16)
+          : null,
+      "borderWidth": border.borderSide.width,
       "borderRadius":
           "${borderRadius.topLeft.x},${borderRadius.topRight.x},${borderRadius.bottomLeft.x},${borderRadius.bottomRight.x}",
     };
