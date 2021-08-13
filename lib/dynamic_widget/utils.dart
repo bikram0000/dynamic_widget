@@ -467,7 +467,7 @@ Map<String, dynamic>? exportBoxDecoration(BoxDecoration? boxDecoration) {
     return null;
   }
   // var borderRadius = boxDecoration.borderRadius!;
-  BorderRadius borderRadius = boxDecoration.borderRadius as BorderRadius;
+  BorderRadius borderRadius =boxDecoration.borderRadius!=null? boxDecoration.borderRadius as BorderRadius:BorderRadius.zero;
   Border? border =
       boxDecoration.border == null ? null : boxDecoration.border as Border;
   DecorationImage? decorationImage = boxDecoration.image;

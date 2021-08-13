@@ -18,7 +18,8 @@ class GridViewWidgetParser extends WidgetParser {
     }
     int? crossAxisCount = map['crossAxisCount'];
     bool? reverse = map.containsKey("reverse") ? map['reverse'] : false;
-    bool? shrinkWrap = map.containsKey("shrinkWrap") ? map["shrinkWrap"] : false;
+    bool? shrinkWrap =
+        map.containsKey("shrinkWrap") ? map["shrinkWrap"] : false;
     double? cacheExtent =
         map.containsKey("cacheExtent") ? map["cacheExtent"]?.toDouble() : 0.0;
     EdgeInsetsGeometry? padding = map.containsKey('padding')
@@ -142,7 +143,8 @@ class _GridViewWidgetState extends State<GridViewWidget> {
   _getMoreData() async {
     if (!isPerformingRequest) {
       setState(() => isPerformingRequest = true);
-      var jsonString = _params.isDemo! ? await fakeRequest() : await doRequest();
+      var jsonString =
+          _params.isDemo! ? await fakeRequest() : await doRequest();
       var buildWidgets = DynamicWidgetBuilder.buildWidgets(
           jsonDecode(jsonString), widget._buildContext, null);
       setState(() {
@@ -268,16 +270,16 @@ class GridViewParams {
   bool? isDemo;
 
   GridViewParams(
-      {this.crossAxisCount,
+      {required this.crossAxisCount,
       this.scrollDirection,
       this.reverse,
       this.shrinkWrap,
       this.cacheExtent,
       this.padding,
-      this.mainAxisSpacing,
-      this.crossAxisSpacing,
-      this.childAspectRatio,
-      this.children,
+      required this.mainAxisSpacing,
+      required this.crossAxisSpacing,
+      required this.childAspectRatio,
+      required this.children,
       this.pageSize,
       this.loadMoreUrl,
       this.isDemo});

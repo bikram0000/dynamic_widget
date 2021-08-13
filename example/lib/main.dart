@@ -69,20 +69,18 @@ class _MyHomePageState extends State<MyHomePage> {
           SliverPadding(
               padding: EdgeInsets.fromLTRB(20, 20, 20, 0),
               sliver: SliverList(
-                  delegate: SliverChildListDelegate([
-                RaisedButton(
-                  child: Text("Dynamic Widget Json String Export Example"),
-                  onPressed: () {
-                    Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                            builder: (context) => JSONExporter()));
-                  },
-                )
-              ]),
-
-              )
-          ),
+                delegate: SliverChildListDelegate([
+                  RaisedButton(
+                    child: Text("Dynamic Widget Json String Export Example"),
+                    onPressed: () {
+                      Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                              builder: (context) => JSONExporter()));
+                    },
+                  )
+                ]),
+              )),
           SliverPadding(
             padding: EdgeInsets.all(20),
             sliver: SliverGrid(
@@ -411,8 +409,7 @@ class _MyHomePageState extends State<MyHomePage> {
                     Navigator.push(
                         context,
                         MaterialPageRoute(
-                            builder: (context) =>
-                                CodeEditorPage(dividerJson)));
+                            builder: (context) => CodeEditorPage(dividerJson)));
                   },
                 ),
               ]),
@@ -504,31 +501,30 @@ class PreviewPage extends StatelessWidget {
       body: Column(
         children: [
           Expanded(
-
-                child: FutureBuilder<Widget?>(
-                  future: _buildWidget(context),
-                  builder: (BuildContext context, AsyncSnapshot<Widget?> snapshot) {
-                    if (snapshot.hasError) {
-                      print(snapshot.error);
-                    }
-                    return snapshot.hasData
-                        ? _exportor = DynamicWidgetJsonExportor(
-
-                              child: snapshot.data,
-
-                        )
-                        : Text("Loading...");
-                  },
-                ),
+            child: FutureBuilder<Widget?>(
+              future: _buildWidget(context),
+              builder: (BuildContext context, AsyncSnapshot<Widget?> snapshot) {
+                if (snapshot.hasError) {
+                  print(snapshot.error);
+                }
+                return snapshot.hasData
+                    ? _exportor = DynamicWidgetJsonExportor(
+                        child: snapshot.data,
+                      )
+                    : Text("Loading...");
+              },
+            ),
           ),
-          RaisedButton(onPressed: (){
-            var exportJsonString = _exportor.exportJsonString();
-            Navigator.push(
-                context,
-                MaterialPageRoute(
-                    builder: (context) =>
-                        CodeEditorPage(exportJsonString)));
-          }, child: Text("export json code"),)
+          RaisedButton(
+            onPressed: () {
+              var exportJsonString = _exportor.exportJsonString();
+              Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                      builder: (context) => CodeEditorPage(exportJsonString)));
+            },
+            child: Text("export json code"),
+          )
         ],
       ),
     );
@@ -557,14 +553,12 @@ class _JSONExporterState extends State<JSONExporter> {
 
   @override
   Widget build(BuildContext context) {
-
     return Scaffold(
       appBar: AppBar(
         // Here we take the value from the MyHomePage object that was created by
         // the App.build method, and use it to set our appbar title.
         title: Text("export example"),
       ),
-
       body: Builder(
         builder: (context) => Container(
           width: double.infinity,
@@ -578,8 +572,8 @@ class _JSONExporterState extends State<JSONExporter> {
                     children: [
                       Image.asset("assets/vip.png"),
                       Positioned(
-                          child: Image.asset("assets/vip.png"),
-                        top:50,
+                        child: Image.asset("assets/vip.png"),
+                        top: 50,
                         left: 50,
                       )
                     ],
@@ -590,11 +584,13 @@ class _JSONExporterState extends State<JSONExporter> {
                 child: RaisedButton(
                   child: Text("Export"),
                   onPressed: () {
-                    var exportor = key.currentWidget as DynamicWidgetJsonExportor;
+                    var exportor =
+                        key.currentWidget as DynamicWidgetJsonExportor;
                     var exportJsonString = exportor.exportJsonString();
                     Scaffold.of(context).showSnackBar(SnackBar(
-                        content: Text("json string was exported to editor page.")));
-                    Future.delayed(Duration(seconds: 1), (){
+                        content:
+                            Text("json string was exported to editor page.")));
+                    Future.delayed(Duration(seconds: 1), () {
                       Navigator.push(
                           context,
                           MaterialPageRoute(

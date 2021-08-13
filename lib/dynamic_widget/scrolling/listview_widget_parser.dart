@@ -55,26 +55,26 @@ class ListViewWidgetParser extends WidgetParser {
   Map<String, dynamic> export(Widget? widget, BuildContext? buildContext) {
     var realWidget = widget as ListViewWidget;
     String scrollDirection = "vertical";
-    if (realWidget._params.scrollDirection == Axis.horizontal) {
+    if (realWidget.params.scrollDirection == Axis.horizontal) {
       scrollDirection = "horizontal";
     }
 
-    var padding = realWidget._params.padding as EdgeInsets?;
+    var padding = realWidget.params.padding as EdgeInsets?;
     return <String, dynamic>{
       "type": "ListView",
       "scrollDirection": scrollDirection,
-      "reverse": realWidget._params.reverse ?? false,
-      "shrinkWrap": realWidget._params.shrinkWrap ?? false,
-      "cacheExtent": realWidget._params.cacheExtent ?? 0.0,
+      "reverse": realWidget.params.reverse ?? false,
+      "shrinkWrap": realWidget.params.shrinkWrap ?? false,
+      "cacheExtent": realWidget.params.cacheExtent ?? 0.0,
       "padding": padding != null
           ? "${padding.left},${padding.top},${padding.right},${padding.bottom}"
           : null,
-      "itemExtent": realWidget._params.itemExtent ?? null,
-      "pageSize": realWidget._params.pageSize ?? 10,
-      "loadMoreUrl": realWidget._params.loadMoreUrl ?? null,
-      "isDemo": realWidget._params.isDemo ?? false,
+      "itemExtent": realWidget.params.itemExtent ?? null,
+      "pageSize": realWidget.params.pageSize ?? 10,
+      "loadMoreUrl": realWidget.params.loadMoreUrl ?? null,
+      "isDemo": realWidget.params.isDemo ?? false,
       "children": DynamicWidgetBuilder.exportWidgets(
-          realWidget._params.children!, buildContext)
+          realWidget.params.children!, buildContext)
     };
   }
 
@@ -83,17 +83,17 @@ class ListViewWidgetParser extends WidgetParser {
 }
 
 class ListViewWidget extends StatefulWidget {
-  final ListViewParams _params;
-  final BuildContext _buildContext;
+  final ListViewParams params;
+  final BuildContext buildContext;
 
-  ListViewWidget(this._params, this._buildContext);
+  ListViewWidget(this.params, this.buildContext);
 
   @override
-  _ListViewWidgetState createState() => _ListViewWidgetState(_params);
+  _ListViewWidgetState createState() => _ListViewWidgetState(params);
 }
 
 class _ListViewWidgetState extends State<ListViewWidget> {
-  ListViewParams _params;
+  ListViewParams params;
   List<Widget?> _items = [];
 
   ScrollController _scrollController = new ScrollController();
@@ -103,16 +103,16 @@ class _ListViewWidgetState extends State<ListViewWidget> {
   //to bottom.
   bool loadCompleted = false;
 
-  _ListViewWidgetState(this._params) {
-    if (_params.children != null) {
-      _items.addAll(_params.children!);
+  _ListViewWidgetState(this.params) {
+    if (params.children != null) {
+      _items.addAll(params.children!);
     }
   }
 
   @override
   void initState() {
     super.initState();
-    if (_params.loadMoreUrl == null || _params.loadMoreUrl!.isEmpty) {
+    if (params.loadMoreUrl == null || params.loadMoreUrl!.isEmpty) {
       loadCompleted = true;
       return;
     }
@@ -128,10 +128,9 @@ class _ListViewWidgetState extends State<ListViewWidget> {
   _getMoreData() async {
     if (!isPerformingRequest) {
       setState(() => isPerformingRequest = true);
-      var jsonString =
-          _params.isDemo! ? await fakeRequest() : await doRequest();
+      var jsonString = params.isDemo! ? await fakeRequest() : await doRequest();
       var buildWidgets = DynamicWidgetBuilder.buildWidgets(
-          jsonDecode(jsonString), widget._buildContext, null);
+          jsonDecode(jsonString), widget.buildContext, null);
       setState(() {
         if (buildWidgets.isEmpty) {
           loadCompleted = true;
@@ -163,11 +162,11 @@ class _ListViewWidgetState extends State<ListViewWidget> {
   @override
   Widget build(BuildContext context) {
     return ListView.builder(
-      scrollDirection: _params.scrollDirection ?? Axis.vertical,
-      reverse: _params.reverse ?? false,
-      shrinkWrap: _params.shrinkWrap ?? false,
-      cacheExtent: _params.cacheExtent,
-      padding: _params.padding,
+      scrollDirection: params.scrollDirection ?? Axis.vertical,
+      reverse: params.reverse ?? false,
+      shrinkWrap: params.shrinkWrap ?? false,
+      cacheExtent: params.cacheExtent,
+      padding: params.padding,
       itemCount: loadCompleted ? _items.length : _items.length + 1,
       itemBuilder: (context, index) {
         if (index == _items.length) {
@@ -213,8 +212,8 @@ class _ListViewWidgetState extends State<ListViewWidget> {
   doRequest() async {
     // Await the http get response, then decode the json-formatted responce.
     try {
-      var response = await http.get(Uri.parse(getLoadMoreUrl(
-          _params.loadMoreUrl, _items.length, _params.pageSize)!));
+      var response = await http.get(Uri.parse(
+          getLoadMoreUrl(params.loadMoreUrl, _items.length, params.pageSize)!));
       if (response.statusCode == 200) {
         return response.body;
       }
@@ -232,7 +231,7 @@ class ListViewParams {
   double? cacheExtent;
   EdgeInsetsGeometry? padding;
   double? itemExtent;
-  List<Widget?>? children;
+  List<Widget>? children;
 
   int? pageSize;
   String? loadMoreUrl;
