@@ -8,7 +8,6 @@ class DynamicWidgetParser extends WidgetParser {
   @override
   Map<String, dynamic> export(Widget? widget, BuildContext? buildContext) {
     var realWidget = widget as DynamicWidgetJsonExportor;
-
     return <String, dynamic>{
       "type": widgetName,
       "child": realWidget.child == null

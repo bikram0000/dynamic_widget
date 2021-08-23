@@ -58,8 +58,8 @@ String exportTextAlign(TextAlign? textAlign) {
   return rt;
 }
 
-TextOverflow parseTextOverflow(String? textOverflowString) {
-  TextOverflow textOverflow = TextOverflow.ellipsis;
+TextOverflow? parseTextOverflow(String? textOverflowString) {
+  TextOverflow? textOverflow;
   switch (textOverflowString) {
     case "ellipsis":
       textOverflow = TextOverflow.ellipsis;
@@ -70,8 +70,6 @@ TextOverflow parseTextOverflow(String? textOverflowString) {
     case "fade":
       textOverflow = TextOverflow.fade;
       break;
-    default:
-      textOverflow = TextOverflow.fade;
   }
   return textOverflow;
 }
@@ -467,7 +465,9 @@ Map<String, dynamic>? exportBoxDecoration(BoxDecoration? boxDecoration) {
     return null;
   }
   // var borderRadius = boxDecoration.borderRadius!;
-  BorderRadius borderRadius =boxDecoration.borderRadius!=null? boxDecoration.borderRadius as BorderRadius:BorderRadius.zero;
+  BorderRadius borderRadius = boxDecoration.borderRadius != null
+      ? boxDecoration.borderRadius as BorderRadius
+      : BorderRadius.zero;
   Border? border =
       boxDecoration.border == null ? null : boxDecoration.border as Border;
   DecorationImage? decorationImage = boxDecoration.image;

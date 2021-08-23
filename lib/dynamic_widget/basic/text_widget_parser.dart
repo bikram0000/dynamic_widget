@@ -63,7 +63,7 @@ class TextWidgetParser implements WidgetParser {
             : "start",
         "overflow": realWidget.overflow != null
             ? exportTextOverflow(realWidget.overflow)
-            : "ellipsis",
+            : null,
         "maxLines": realWidget.maxLines,
         "semanticsLabel": realWidget.semanticsLabel,
         "softWrap": realWidget.softWrap,
@@ -81,7 +81,7 @@ class TextWidgetParser implements WidgetParser {
             : "start",
         "overflow": realWidget.overflow != null
             ? exportTextOverflow(realWidget.overflow)
-            : "ellipsis",
+            : null,
         "maxLines": realWidget.maxLines,
         "semanticsLabel": realWidget.semanticsLabel,
         "softWrap": realWidget.softWrap,

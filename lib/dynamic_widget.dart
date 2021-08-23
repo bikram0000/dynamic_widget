@@ -38,7 +38,6 @@ import 'package:flutter/widgets.dart';
 import 'package:logging/logging.dart';
 
 import 'dynamic_widget/basic/backdropFilter_widget_parser.dart';
-import 'dynamic_widget/basic/category_widget_parser.dart';
 import 'dynamic_widget/basic/cliprrect_widget_parser.dart';
 import 'dynamic_widget/basic/dynamic_widget_parser.dart';
 import 'dynamic_widget/basic/flexible_widget_parser.dart';
@@ -93,7 +92,6 @@ class DynamicWidgetBuilder {
     SwiperWidgetParser(),
     TextFieldWidgetParser(),
     DynamicWidgetParser(),
-    CategoryWidgetParser(),
     FlexibleWidgetParser(),
   ];
 
