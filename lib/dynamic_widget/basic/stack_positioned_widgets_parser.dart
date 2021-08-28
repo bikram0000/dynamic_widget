@@ -44,10 +44,9 @@ class StackWidgetParser extends WidgetParser {
   @override
   Widget parse(Map<String, dynamic> map, BuildContext buildContext,
       ClickListener? listener) {
-
     return Stack(
       alignment: map.containsKey("alignment")
-          ? parseAlignment(map["alignment"])
+          ? parseAlignment(map["alignment"]) ?? AlignmentDirectional.topStart
           : AlignmentDirectional.topStart,
       textDirection: map.containsKey("textDirection")
           ? parseTextDirection(map["textDirection"])
@@ -69,9 +68,10 @@ class StackWidgetParser extends WidgetParser {
     var realWidget = widget as Stack;
     return <String, dynamic>{
       "type": "Stack",
-      "alignment": realWidget.alignment is AlignmentDirectional ?
-                    exportAlignmentDirectional(realWidget.alignment as AlignmentDirectional)
-                      : exportAlignment(realWidget.alignment as Alignment),
+      "alignment": realWidget.alignment is AlignmentDirectional
+          ? exportAlignmentDirectional(
+              realWidget.alignment as AlignmentDirectional)
+          : exportAlignment(realWidget.alignment as Alignment),
       "textDirection": exportTextDirection(realWidget.textDirection),
       "fit": exportStackFit(realWidget.fit),
       "clipBehavior": exportClipBehavior(realWidget.clipBehavior),

@@ -25,7 +25,7 @@ class AssetImageWidgetParser extends WidgetParser {
     BoxFit? boxFit =
         map.containsKey('boxFit') ? parseBoxFit(map['boxFit']) : null;
     Alignment alignment = map.containsKey('alignment')
-        ? parseAlignment(map['alignment'])
+        ? parseAlignment(map['alignment']) ?? Alignment.center
         : Alignment.center;
     ImageRepeat repeat = map.containsKey('repeat')
         ? parseImageRepeat(map['repeat'])!
@@ -215,7 +215,7 @@ class NetworkImageWidgetParser extends WidgetParser {
     BoxFit? boxFit =
         map.containsKey('boxFit') ? parseBoxFit(map['boxFit']) : null;
     Alignment alignment = map.containsKey('alignment')
-        ? parseAlignment(map['alignment'])
+        ? parseAlignment(map['alignment']) ?? Alignment.center
         : Alignment.center;
     ImageRepeat repeat = map.containsKey('repeat')
         ? parseImageRepeat(map['repeat'])!

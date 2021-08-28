@@ -370,13 +370,13 @@ InputDecoration? parseInputDecoration(Map<String, dynamic>? map) {
   if (map == null) {
     return null;
   }
-  InputBorder? inputBorder = parseInputBorder(map['border']);
+  InputBorder inputBorder = parseInputBorder(map['border']) ?? InputBorder.none;
   return InputDecoration(
     isDense: map['isDense'],
     hintText: map['hintText'],
     labelText: map['labelText'],
     border: inputBorder,
-    labelStyle: TextStyle(color: inputBorder!.borderSide.color),
+    labelStyle: TextStyle(color: inputBorder.borderSide.color),
     focusedBorder: parseInputBorder(map['border']),
   );
 }
@@ -522,8 +522,8 @@ BoxDecoration? parseBoxDecoration(Map<String, dynamic>? map) {
               color: parseHexColor(border[1]) ?? Colors.transparent));
 }
 
-Alignment parseAlignment(String? alignmentString) {
-  Alignment alignment = Alignment.center;
+Alignment? parseAlignment(String? alignmentString) {
+  Alignment? alignment;
   switch (alignmentString) {
     case 'topLeft':
       alignment = Alignment.topLeft;
