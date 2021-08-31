@@ -541,6 +541,12 @@ class DefaultClickListener implements ClickListener {
   void onClicked(String? event) {
     print("Receive click event: " + (event == null ? "" : event));
   }
+
+  @override
+  TextEditingController getTextEditingController(String? data) {
+    // TODO: implement getTextEditingController
+    throw UnimplementedError();
+  }
 }
 
 class JSONExporter extends StatefulWidget {
