@@ -377,7 +377,7 @@ InputDecoration? parseInputDecoration(Map<String, dynamic>? map) {
     labelText: map['labelText'],
     border: inputBorder,
     labelStyle: TextStyle(color: inputBorder.borderSide.color),
-    focusedBorder: parseInputBorder(map['border']),
+    focusedBorder: inputBorder,
   );
 }
 
@@ -912,7 +912,7 @@ BoxFit? parseBoxFit(String? boxFitString) {
 }
 
 String exportBoxFit(BoxFit? boxFit) {
-  String rt = "contain";
+  String rt = "cover";
   if (boxFit == BoxFit.fill) {
     rt = "fill";
   }

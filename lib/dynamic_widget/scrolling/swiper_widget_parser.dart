@@ -37,7 +37,7 @@ class SwiperWidgetParser extends WidgetParser {
             viewportFraction: map['viewportFraction'],
             autoplay: map['autoplay'],
             scale: map['scale']),
-        buildContext);
+        );
   }
 
   @override
@@ -49,9 +49,8 @@ class SwiperWidgetParser extends WidgetParser {
 
 class SwiperWidget extends StatefulWidget {
   final SwiperParams params;
-  final BuildContext _buildContext;
 
-  SwiperWidget(this.params, this._buildContext);
+  SwiperWidget(this.params);
 
   @override
   _SwiperWidgetState createState() => _SwiperWidgetState(params);
@@ -91,8 +90,8 @@ class _SwiperWidgetState extends State<SwiperWidget> {
       autoplay: params.autoplay ?? false,
       pagination: params.pagination
           ? new SwiperPagination(
-              builder: const DotSwiperPaginationBuilder(
-                  size: 10.0, activeSize: 10.0, space: 5.0))
+          builder: const DotSwiperPaginationBuilder(
+              size: 10.0, activeSize: 10.0, space: 5.0))
           : null,
       scale: params.scale,
     );
@@ -109,13 +108,12 @@ class SwiperParams {
   List<Widget>? children;
   double? scale;
 
-  SwiperParams(
-      {this.itemCount,
-      this.itemWidth,
-      this.layout,
-      this.viewportFraction,
-      this.autoplay,
-      required this.pagination,
-      this.scale,
-      this.children});
+  SwiperParams({this.itemCount,
+    this.itemWidth,
+    this.layout,
+    this.viewportFraction,
+    this.autoplay,
+    required this.pagination,
+    this.scale,
+    this.children});
 }
