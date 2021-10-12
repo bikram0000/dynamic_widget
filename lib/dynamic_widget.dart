@@ -212,7 +212,7 @@ abstract class WidgetParser {
 }
 
 abstract class ClickListener {
-  void onClicked(String? event);
+  void onClicked(String? event, {dynamic data});
   TextEditingController getTextEditingController(String? data);
 }
 
@@ -220,7 +220,7 @@ class NonResponseWidgetClickListener implements ClickListener {
   static final Logger log = Logger('NonResponseWidgetClickListener');
 
   @override
-  void onClicked(String? event) {
+  void onClicked(String? event,{dynamic data}) {
     log.info("receiver click event: " + event!);
     print("receiver click event: " + event);
   }
