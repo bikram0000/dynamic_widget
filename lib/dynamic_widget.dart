@@ -120,9 +120,7 @@ class DynamicWidgetBuilder {
       String json, BuildContext buildContext, ClickListener listener) {
     initDefaultParsersIfNess();
     var map = jsonDecode(json);
-    ClickListener _listener =
-        listener == null ? new NonResponseWidgetClickListener() : listener;
-    var widget = buildFromMap(map, buildContext, _listener);
+    var widget = buildFromMap(map, buildContext, listener);
     return widget;
   }
 
@@ -213,6 +211,7 @@ abstract class WidgetParser {
 
 abstract class ClickListener {
   void onClicked(String? event, {dynamic data});
+
   TextEditingController getTextEditingController(String? data);
 }
 

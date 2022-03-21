@@ -27,17 +27,17 @@ class SwiperWidgetParser extends WidgetParser {
   Widget parse(Map<String, dynamic> map, BuildContext buildContext,
       ClickListener? listener) {
     return SwiperWidget(
-        SwiperParams(
-            pagination: map['pagination'],
-            children: DynamicWidgetBuilder.buildWidgets(
-                map['children'], buildContext, listener),
-            itemCount: map['itemCount'],
-            itemWidth: map['itemWidth'],
-            layout: SwiperLayout.values[map['layout']],
-            viewportFraction: map['viewportFraction'],
-            autoplay: map['autoplay'],
-            scale: map['scale']),
-        );
+      SwiperParams(
+          pagination: map['pagination'],
+          children: DynamicWidgetBuilder.buildWidgets(
+              map['children'], buildContext, listener),
+          itemCount: map['itemCount'],
+          itemWidth: map['itemWidth'],
+          layout: SwiperLayout.values[map['layout']],
+          viewportFraction: map['viewportFraction'],
+          autoplay: map['autoplay'],
+          scale: map['scale']),
+    );
   }
 
   @override
@@ -90,8 +90,8 @@ class _SwiperWidgetState extends State<SwiperWidget> {
       autoplay: params.autoplay ?? false,
       pagination: params.pagination
           ? new SwiperPagination(
-          builder: const DotSwiperPaginationBuilder(
-              size: 10.0, activeSize: 10.0, space: 5.0))
+              builder: const DotSwiperPaginationBuilder(
+                  size: 10.0, activeSize: 10.0, space: 5.0))
           : null,
       scale: params.scale,
     );
@@ -108,12 +108,13 @@ class SwiperParams {
   List<Widget>? children;
   double? scale;
 
-  SwiperParams({this.itemCount,
-    this.itemWidth,
-    this.layout,
-    this.viewportFraction,
-    this.autoplay,
-    required this.pagination,
-    this.scale,
-    this.children});
+  SwiperParams(
+      {this.itemCount,
+      this.itemWidth,
+      this.layout,
+      this.viewportFraction,
+      this.autoplay,
+      required this.pagination,
+      this.scale,
+      this.children});
 }
