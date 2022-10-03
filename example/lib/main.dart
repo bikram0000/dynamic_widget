@@ -70,7 +70,7 @@ class _MyHomePageState extends State<MyHomePage> {
               padding: EdgeInsets.fromLTRB(20, 20, 20, 0),
               sliver: SliverList(
                 delegate: SliverChildListDelegate([
-                  RaisedButton(
+                  ElevatedButton(
                     child: Text("Dynamic Widget Json String Export Example"),
                     onPressed: () {
                       Navigator.push(
@@ -90,7 +90,7 @@ class _MyHomePageState extends State<MyHomePage> {
                 crossAxisSpacing: 10,
               ),
               delegate: SliverChildListDelegate([
-                RaisedButton(
+                ElevatedButton(
                   child: Text("Container"),
                   onPressed: () {
                     Navigator.push(
@@ -100,7 +100,7 @@ class _MyHomePageState extends State<MyHomePage> {
                                 CodeEditorPage(containerJson)));
                   },
                 ),
-                RaisedButton(
+                ElevatedButton(
                   child: Text("Row"),
                   onPressed: () {
                     Navigator.push(
@@ -109,7 +109,7 @@ class _MyHomePageState extends State<MyHomePage> {
                             builder: (context) => CodeEditorPage(rowJson)));
                   },
                 ),
-                RaisedButton(
+                ElevatedButton(
                   child: Text("Column"),
                   onPressed: () {
                     Navigator.push(
@@ -118,7 +118,7 @@ class _MyHomePageState extends State<MyHomePage> {
                             builder: (context) => CodeEditorPage(columnJson)));
                   },
                 ),
-                RaisedButton(
+                ElevatedButton(
                   child: Text("Text"),
                   onPressed: () {
                     Navigator.push(
@@ -127,7 +127,7 @@ class _MyHomePageState extends State<MyHomePage> {
                             builder: (context) => CodeEditorPage(textJson)));
                   },
                 ),
-                RaisedButton(
+                ElevatedButton(
                   child: Text("SelectableText"),
                   onPressed: () {
                     Navigator.push(
@@ -137,7 +137,7 @@ class _MyHomePageState extends State<MyHomePage> {
                                 CodeEditorPage(selectableTextJson)));
                   },
                 ),
-                RaisedButton(
+                ElevatedButton(
                   child: Text("TextSpan"),
                   onPressed: () {
                     Navigator.push(
@@ -147,7 +147,7 @@ class _MyHomePageState extends State<MyHomePage> {
                                 CodeEditorPage(textSpanJson)));
                   },
                 ),
-                RaisedButton(
+                ElevatedButton(
                   child: Text("Icon"),
                   onPressed: () {
                     Navigator.push(
@@ -156,7 +156,7 @@ class _MyHomePageState extends State<MyHomePage> {
                             builder: (context) => CodeEditorPage(iconJson)));
                   },
                 ),
-                RaisedButton(
+                ElevatedButton(
                   child: Text("DropCapText"),
                   onPressed: () {
                     Navigator.push(
@@ -166,7 +166,7 @@ class _MyHomePageState extends State<MyHomePage> {
                                 CodeEditorPage(dropCapTextJson)));
                   },
                 ),
-                RaisedButton(
+                ElevatedButton(
                   child: Text("DropCapText with Image"),
                   onPressed: () {
                     Navigator.push(
@@ -176,17 +176,7 @@ class _MyHomePageState extends State<MyHomePage> {
                                 CodeEditorPage(dropCapTextImageJson)));
                   },
                 ),
-                RaisedButton(
-                  child: Text("RaisedButton"),
-                  onPressed: () {
-                    Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                            builder: (context) =>
-                                CodeEditorPage(raisedButtonJson)));
-                  },
-                ),
-                RaisedButton(
+                ElevatedButton(
                   child: Text("ElevatedButton"),
                   onPressed: () {
                     Navigator.push(
@@ -196,7 +186,17 @@ class _MyHomePageState extends State<MyHomePage> {
                                 CodeEditorPage(elevatedButtonJson)));
                   },
                 ),
-                RaisedButton(
+                ElevatedButton(
+                  child: Text("ElevatedButton"),
+                  onPressed: () {
+                    Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                            builder: (context) =>
+                                CodeEditorPage(elevatedButtonJson)));
+                  },
+                ),
+                ElevatedButton(
                   child: Text("Asset Image"),
                   onPressed: () {
                     Navigator.push(
@@ -206,7 +206,7 @@ class _MyHomePageState extends State<MyHomePage> {
                                 CodeEditorPage(assetImageJson)));
                   },
                 ),
-                RaisedButton(
+                ElevatedButton(
                   child: Text("Network Image"),
                   onPressed: () {
                     Navigator.push(
@@ -216,7 +216,7 @@ class _MyHomePageState extends State<MyHomePage> {
                                 CodeEditorPage(networkImageJson)));
                   },
                 ),
-                RaisedButton(
+                ElevatedButton(
                   child: Text("Placeholder"),
                   onPressed: () {
                     Navigator.push(
@@ -226,7 +226,7 @@ class _MyHomePageState extends State<MyHomePage> {
                                 CodeEditorPage(placeholderJson)));
                   },
                 ),
-                RaisedButton(
+                ElevatedButton(
                   child: Text("GridView"),
                   onPressed: () {
                     Navigator.push(
@@ -236,7 +236,7 @@ class _MyHomePageState extends State<MyHomePage> {
                                 CodeEditorPage(gridviewJson)));
                   },
                 ),
-                RaisedButton(
+                ElevatedButton(
                   child: Text("ListView"),
                   onPressed: () {
                     Navigator.push(
@@ -246,7 +246,7 @@ class _MyHomePageState extends State<MyHomePage> {
                                 CodeEditorPage(listviewJson)));
                   },
                 ),
-                RaisedButton(
+                ElevatedButton(
                   child: Text("PageView"),
                   onPressed: () {
                     Navigator.push(
@@ -256,7 +256,7 @@ class _MyHomePageState extends State<MyHomePage> {
                                 CodeEditorPage(pageviewJson)));
                   },
                 ),
-                RaisedButton(
+                ElevatedButton(
                   child: Text("Expanded"),
                   onPressed: () {
                     Navigator.push(
@@ -266,7 +266,7 @@ class _MyHomePageState extends State<MyHomePage> {
                                 CodeEditorPage(expandedJson)));
                   },
                 ),
-                RaisedButton(
+                ElevatedButton(
                   child: Text("ListView Auto load more"),
                   onPressed: () {
                     Navigator.push(
@@ -276,7 +276,7 @@ class _MyHomePageState extends State<MyHomePage> {
                                 CodeEditorPage(listviewLoadmoreJson)));
                   },
                 ),
-                RaisedButton(
+                ElevatedButton(
                   child: Text("GridView Auto load more"),
                   onPressed: () {
                     Navigator.push(
@@ -286,7 +286,7 @@ class _MyHomePageState extends State<MyHomePage> {
                                 CodeEditorPage(gridviewloadmoreJson)));
                   },
                 ),
-                RaisedButton(
+                ElevatedButton(
                   child: Text("Stack and Positioned"),
                   onPressed: () {
                     Navigator.push(
@@ -295,7 +295,7 @@ class _MyHomePageState extends State<MyHomePage> {
                             builder: (context) => CodeEditorPage(stackJson)));
                   },
                 ),
-                RaisedButton(
+                ElevatedButton(
                   child: Text("IndexedStack"),
                   onPressed: () {
                     Navigator.push(
@@ -305,7 +305,7 @@ class _MyHomePageState extends State<MyHomePage> {
                                 CodeEditorPage(indexedstackJson)));
                   },
                 ),
-                RaisedButton(
+                ElevatedButton(
                   child: Text("SizedBox"),
                   onPressed: () {
                     Navigator.push(
@@ -315,7 +315,7 @@ class _MyHomePageState extends State<MyHomePage> {
                                 CodeEditorPage(sizedboxJson)));
                   },
                 ),
-                RaisedButton(
+                ElevatedButton(
                   child: Text("Opacity"),
                   onPressed: () {
                     Navigator.push(
@@ -324,7 +324,7 @@ class _MyHomePageState extends State<MyHomePage> {
                             builder: (context) => CodeEditorPage(opacityJson)));
                   },
                 ),
-                RaisedButton(
+                ElevatedButton(
                   child: Text("Wrap"),
                   onPressed: () {
                     Navigator.push(
@@ -333,7 +333,7 @@ class _MyHomePageState extends State<MyHomePage> {
                             builder: (context) => CodeEditorPage(wrapJson)));
                   },
                 ),
-                RaisedButton(
+                ElevatedButton(
                   child: Text("ClipRRect"),
                   onPressed: () {
                     Navigator.push(
@@ -343,7 +343,7 @@ class _MyHomePageState extends State<MyHomePage> {
                                 CodeEditorPage(cliprrectJson)));
                   },
                 ),
-                RaisedButton(
+                ElevatedButton(
                   child: Text("SafeArea"),
                   onPressed: () {
                     Navigator.push(
@@ -353,7 +353,7 @@ class _MyHomePageState extends State<MyHomePage> {
                                 CodeEditorPage(safeareaJson)));
                   },
                 ),
-                RaisedButton(
+                ElevatedButton(
                   child: Text("ListTile"),
                   onPressed: () {
                     Navigator.push(
@@ -363,7 +363,7 @@ class _MyHomePageState extends State<MyHomePage> {
                                 CodeEditorPage(listTileJson)));
                   },
                 ),
-                RaisedButton(
+                ElevatedButton(
                   child: Text("Scaffold & AppBar"),
                   onPressed: () {
                     Navigator.push(
@@ -373,7 +373,7 @@ class _MyHomePageState extends State<MyHomePage> {
                                 CodeEditorPage(scaffoldAppBarJson)));
                   },
                 ),
-                RaisedButton(
+                ElevatedButton(
                   child: Text("LimitedBox"),
                   onPressed: () {
                     Navigator.push(
@@ -383,7 +383,7 @@ class _MyHomePageState extends State<MyHomePage> {
                                 CodeEditorPage(limitedboxJson)));
                   },
                 ),
-                RaisedButton(
+                ElevatedButton(
                   child: Text("Offstage"),
                   onPressed: () {
                     Navigator.push(
@@ -393,7 +393,7 @@ class _MyHomePageState extends State<MyHomePage> {
                                 CodeEditorPage(offstageJson)));
                   },
                 ),
-                RaisedButton(
+                ElevatedButton(
                   child: Text("OverflowBox"),
                   onPressed: () {
                     Navigator.push(
@@ -403,7 +403,7 @@ class _MyHomePageState extends State<MyHomePage> {
                                 CodeEditorPage(overflowboxJson)));
                   },
                 ),
-                RaisedButton(
+                ElevatedButton(
                   child: Text("Divider"),
                   onPressed: () {
                     Navigator.push(
@@ -463,7 +463,7 @@ class _CodeEditorPageState extends State<CodeEditorPage> {
             SizedBox(
               height: 8,
             ),
-            RaisedButton(
+            ElevatedButton(
               child: Text("Preview"),
               onPressed: () {
                 setState(() {
@@ -515,7 +515,7 @@ class PreviewPage extends StatelessWidget {
               },
             ),
           ),
-          RaisedButton(
+          ElevatedButton(
             onPressed: () {
               var exportJsonString = _exportor.exportJsonString();
               Navigator.push(
@@ -587,13 +587,13 @@ class _JSONExporterState extends State<JSONExporter> {
                 ),
               ),
               Container(
-                child: RaisedButton(
+                child: ElevatedButton(
                   child: Text("Export"),
                   onPressed: () {
                     var exportor =
                         key.currentWidget as DynamicWidgetJsonExportor;
                     var exportJsonString = exportor.exportJsonString();
-                    Scaffold.of(context).showSnackBar(SnackBar(
+                    ScaffoldMessenger.of(context).showSnackBar(SnackBar(
                         content:
                             Text("json string was exported to editor page.")));
                     Future.delayed(Duration(seconds: 1), () {

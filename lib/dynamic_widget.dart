@@ -52,7 +52,7 @@ class DynamicWidgetBuilder {
     ContainerWidgetParser(),
     TextWidgetParser(),
     SelectableTextWidgetParser(),
-    RaisedButtonParser(),
+    // RaisedButtonParser(),
     RowWidgetParser(),
     ColumnWidgetParser(),
     AssetImageWidgetParser(),
